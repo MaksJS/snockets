@@ -316,7 +316,9 @@ minify = (js) ->
   jsp = uglify.parser
   pro = uglify.uglify
   ast = jsp.parse js
-  ast = pro.ast_mangle ast
+  ast = pro.ast_mangle ast,
+    no_mangle_functions: true
+    except: global.UGLIFY_JS_RESERVED_NAMES
   ast = pro.ast_squeeze ast
   pro.gen_code ast
 
